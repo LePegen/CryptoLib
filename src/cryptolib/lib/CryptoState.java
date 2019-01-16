@@ -14,11 +14,14 @@ import java.util.ArrayList;
  * @author prg08p-a67-08
  */
 public abstract class CryptoState {
-    ArrayList<CryptoProcess> processes;
-
-    public CryptoState() {
+ protected ArrayList<CryptoProcess> processes;
+ protected String key;   
+ public CryptoState() {
         processes=new ArrayList<>();
+        this.key=setKey();
     }
+
+    public abstract String setKey();
 
 	public void encrypt(CryptoKey key,CryptoData data) {
         for (int i = 0; i < processes.size(); i++) {
@@ -28,7 +31,7 @@ public abstract class CryptoState {
 
 	public void decrypt(CryptoKey key,CryptoData data) {
         for (int i = processes.size()-1; i > -1; i--) {
-            
+            processes.get(i).execute();
         }
 	}
     

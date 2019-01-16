@@ -5,10 +5,22 @@
  */
 package lib.strategy.MDCryptoState;
 
+import lib.CryptoState;
+import lib.strategy.MDCryptoState.MDProcesses.MDAddRoundKey;
+
 /**
  *
  * @author prg08p-a67-08
  */
-public class MDCryptoState {
-    
+public class MDCryptoState extends CryptoState{
+    public MDCryptoState() {
+        MDAddRoundKey addRoundKey=new MDAddRoundKey();
+        //setter for add round key
+        processes.add(addRoundKey);
+    }
+
+    @Override
+    public String setKey() {
+        return "Multi Dimension";
+    }
 }

@@ -7,14 +7,19 @@ package lib.strategy.MDCryptoState;
 
 import java.util.ArrayList;
 
+import lib.CryptoKey;
+
 /**
  *
  * @author prg08p-a67-08
  */
-public class MDCryptoKey {
-
+public class MDCryptoKey extends CryptoKey {
+    private ArrayList ket;
+    public MDCryptoKey() {
+        ket=new ArrayList();
+    }
 	public ArrayList getData() {
-		return null;
+		return this.ket;
 	}
     
 }

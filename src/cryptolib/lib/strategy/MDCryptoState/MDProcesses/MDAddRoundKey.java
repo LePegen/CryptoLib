@@ -17,6 +17,11 @@ import lib.strategy.MDCryptoState.MDCryptoKey;
  * @author prg08p-a67-08
  */
 public class MDAddRoundKey extends CryptoProcess{
+    /**
+     * TODO: unit testing
+     */
+
+     //refer to super class
     private MDCryptoKey key;
     private MDCryptoData data;
 
@@ -24,18 +29,21 @@ public class MDAddRoundKey extends CryptoProcess{
     protected void action() {
         ArrayList keyAL=key.getData();
         ArrayList dataAL=data.getData();
-        recDecrypt(keyAL, dataAL);
+        this.data.setData(reccrypt(keyAL, dataAL));
     }
 
-    private ArrayList recDecrypt(ArrayList key,ArrayList data){
+    /**
+     * XOR
+     */
+    private ArrayList reccrypt(ArrayList key,ArrayList data){
         ArrayList newData=new ArrayList<>();
         if(data.get(0) instanceof Integer){
             for (int i = 0; i < key.size(); i++) {
-                newData.set(i,(int)key.get(i)^(int)data.get(i));
+                newData.set(i, (int) key.get(i) ^ (int) data.get(i));
             }
         }else{
             for (int i = 0; i < key.size(); i++) {
-                newData=recDecrypt((ArrayList)key.get(i),(ArrayList)data.get(i));   
+                newData=reccrypt((ArrayList)key.get(i),(ArrayList)data.get(i));   
             }
         }
         return newData;

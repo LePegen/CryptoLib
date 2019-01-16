@@ -7,17 +7,22 @@ package lib.strategy.MDCryptoState;
 
 import java.util.ArrayList;
 
+import lib.CryptoData;
+
 /**
  *
  * @author prg08p-a67-08
  */
-public class MDCryptoData {
+public class MDCryptoData extends CryptoData {
     private ArrayList data;
     public MDCryptoData() {
-        super();
+        data=new ArrayList();
     }
 	public ArrayList getData() {
-		return null;
+		return this.data;
+	}
+	public void setData(ArrayList recDecrypt) {
+        this.data=recDecrypt;
 	}
 
     
