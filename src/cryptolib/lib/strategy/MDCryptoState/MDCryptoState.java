@@ -20,7 +20,7 @@ public class MDCryptoState extends CryptoState{
     }
 
     @Override
-    public String setKey() {
+    public String getName() {
         return "Multi Dimension";
     }
 }

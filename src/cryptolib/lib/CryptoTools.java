@@ -1,5 +1,7 @@
 package lib;
 
+import lib.strategy.MDCryptoState.MDCryptoState;
+
 import java.util.HashMap;
 
 /*
@@ -19,6 +21,7 @@ public abstract class CryptoTools {
 
     public CryptoTools() {
         states=new HashMap<>();
+        states.put("MD",new MDCryptoState());
     }
 
     public void setEncryptState(String stateKey){
@@ -32,4 +35,5 @@ public abstract class CryptoTools {
     public void decrypt(CryptoKey key,CryptoData data){
         currentState.decrypt(key,data);        
     }
+
 }

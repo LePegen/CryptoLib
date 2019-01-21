@@ -12,8 +12,9 @@ package lib;
  */
 public abstract class CryptoProcess {
     protected abstract void action();
-
-    public void execute(){
+    protected CryptoState state;
+    public void execute(CryptoState state){
+        this.state=state;
         this.action();
     }
 }

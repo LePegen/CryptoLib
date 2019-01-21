@@ -12,5 +12,16 @@ import lib.strategy.MDCryptoState.MDCryptoData;
  * @author prg08p-a67-08
  */
 public class MDDataFactory {
+
+    private int dim;
+    public MDDataFactory(int dim) {
+        this.dim=dim;
+    }
+
+    public MDCryptoData createData(byte[] data){
+        MDCryptoData cryptoData=new MDCryptoData();
+
+        return cryptoData;
+    }
     
 }

@@ -10,29 +10,50 @@ import java.util.ArrayList;
 
 
 /**
- *
  * @author prg08p-a67-08
  */
 public abstract class CryptoState {
- protected ArrayList<CryptoProcess> processes;
- protected String key;   
- public CryptoState() {
-        processes=new ArrayList<>();
-        this.key=setKey();
+    protected ArrayList<CryptoProcess> processes;
+    protected String name;
+    protected CryptoData data;
+    protected CryptoKey key;
+
+    public CryptoState() {
+        processes = new ArrayList<>();
+        this.name = getName();
     }
 
-    public abstract String setKey();
+    public abstract String getName();
 
-	public void encrypt(CryptoKey key,CryptoData data) {
+    public void encrypt(CryptoKey key, CryptoData data) {
+        this.key=key;
+        this.data=data;
         for (int i = 0; i < processes.size(); i++) {
-            processes.get(i).execute();
+            processes.get(i).execute(this);
         }
-	}
+    }
 
-	public void decrypt(CryptoKey key,CryptoData data) {
-        for (int i = processes.size()-1; i > -1; i--) {
-            processes.get(i).execute();
+    public void decrypt(CryptoKey key, CryptoData data) {
+        this.key=key;
+        this.data=data;
+        for (int i = processes.size() - 1; i > -1; i--) {
+            processes.get(i).execute(this);
         }
-	}
-    
+    }
+
+    public CryptoData getData() {
+        return data;
+    }
+
+    public void setData(CryptoData data) {
+        this.data = data;
+    }
+
+    public CryptoKey getKey() {
+        return key;
+    }
+
+    public void setKey(CryptoKey key) {
+        this.key = key;
+    }
 }

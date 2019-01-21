@@ -17,6 +17,7 @@ import lib.strategy.MDCryptoState.MDCryptoKey;
  * @author prg08p-a67-08
  */
 public class MDAddRoundKey extends CryptoProcess{
+
     /**
      * TODO: unit testing
      */
@@ -25,17 +26,23 @@ public class MDAddRoundKey extends CryptoProcess{
     private MDCryptoKey key;
     private MDCryptoData data;
 
+    public MDAddRoundKey() {
+        //anti pattern i think
+        this.data= (MDCryptoData) state.getData();
+        this.key = (MDCryptoKey) state.getKey();
+    }
+
     @Override
     protected void action() {
         ArrayList keyAL=key.getData();
         ArrayList dataAL=data.getData();
-        this.data.setData(reccrypt(keyAL, dataAL));
+        this.data.setData(crypt(keyAL, dataAL));
     }
 
     /**
      * XOR
      */
-    private ArrayList reccrypt(ArrayList key,ArrayList data){
+    private ArrayList crypt(ArrayList key, ArrayList data){
         ArrayList newData=new ArrayList<>();
         if(data.get(0) instanceof Integer){
             for (int i = 0; i < key.size(); i++) {
@@ -43,7 +50,7 @@ public class MDAddRoundKey extends CryptoProcess{
             }
         }else{
             for (int i = 0; i < key.size(); i++) {
-                newData=reccrypt((ArrayList)key.get(i),(ArrayList)data.get(i));   
+                newData= crypt((ArrayList)key.get(i),(ArrayList)data.get(i));
             }
         }
         return newData;
