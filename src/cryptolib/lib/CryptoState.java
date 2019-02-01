@@ -1,4 +1,4 @@
-package lib;
+package cryptolib.lib;
 
 import java.util.ArrayList;
 
@@ -7,12 +7,11 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  * @author prg08p-a67-08
  */
 public abstract class CryptoState {
+
     protected ArrayList<CryptoProcess> processes;
     protected String name;
     protected CryptoData data;
@@ -26,16 +25,16 @@ public abstract class CryptoState {
     public abstract String getName();
 
     public void encrypt(CryptoKey key, CryptoData data) {
-        this.key=key;
-        this.data=data;
+        this.key = key;
+        this.data = data;
         for (int i = 0; i < processes.size(); i++) {
             processes.get(i).execute(this);
         }
     }
 
     public void decrypt(CryptoKey key, CryptoData data) {
-        this.key=key;
-        this.data=data;
+        this.key = key;
+        this.data = data;
         for (int i = processes.size() - 1; i > -1; i--) {
             processes.get(i).execute(this);
         }

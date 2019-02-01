@@ -1,11 +1,9 @@
-package lib.strategy.MDCryptoState.MDProcesses;
-
-import static org.junit.Assert.*;
+package cryptolib.lib.strategy.MDCryptoState.MDProcesses;
 
 public class MDAddRoundKeyTest {
 
-    @org.junit.Test
     public void action() {
-        MDAddRoundKey addRoundKey=new MDAddRoundKey();
+        MDShiftByte shiftByte = new MDShiftByte();
+        
     }
 }

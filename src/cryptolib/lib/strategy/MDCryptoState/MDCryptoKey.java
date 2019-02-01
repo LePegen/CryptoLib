@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib.strategy.MDCryptoState;
+package cryptolib.lib.strategy.MDCryptoState;
 
 import java.util.ArrayList;
 
-import lib.CryptoKey;
+import cryptolib.lib.CryptoKey;
 
 /**
  *
  * @author prg08p-a67-08
  */
 public class MDCryptoKey extends CryptoKey {
+
     private ArrayList ket;
+
     public MDCryptoKey() {
-        ket=new ArrayList();
+        ket = new ArrayList();
     }
-	public ArrayList getData() {
-		return this.ket;
-	}
-    
+
+    public ArrayList getData() {
+        return this.ket;
+    }
+
 }

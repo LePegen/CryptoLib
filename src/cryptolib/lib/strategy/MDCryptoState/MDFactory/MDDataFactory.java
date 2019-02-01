@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib.strategy.MDCryptoState.MDFactory;
+package cryptolib.lib.strategy.MDCryptoState.MDFactory;
 
-import lib.strategy.MDCryptoState.MDCryptoData;
+import cryptolib.lib.strategy.MDCryptoState.MDCryptoData;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,14 +15,30 @@ import lib.strategy.MDCryptoState.MDCryptoData;
 public class MDDataFactory {
 
     private int dim;
+
     public MDDataFactory(int dim) {
-        this.dim=dim;
+        this.dim = dim;
     }
 
-    public MDCryptoData createData(byte[] data){
-        MDCryptoData cryptoData=new MDCryptoData();
-
+    public MDCryptoData createData(byte[] data) {
+        MDCryptoData cryptoData = new MDCryptoData();
+        ArrayList curArray = createData();
         return cryptoData;
     }
-    
+
+    public void popluateBlock(byte[] data) {
+        
+    }
+
+    public ArrayList createData() {
+        ArrayList curArray = new ArrayList();
+        for (int i = 0; i < this.dim; i++) {
+            for (int j = 0; j < 4; j++) {
+                curArray.add(new ArrayList());
+            }
+        }
+        //4 is standard
+        return curArray;
+    }
+
 }

@@ -3,24 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib.strategy.MDCryptoState;
+package cryptolib.lib.strategy.MDCryptoState;
 
-import lib.CryptoState;
-import lib.strategy.MDCryptoState.MDProcesses.MDAddRoundKey;
+import cryptolib.lib.CryptoState;
+import cryptolib.lib.strategy.MDCryptoState.MDProcesses.*;
 
 /**
  *
  * @author prg08p-a67-08
  */
-public class MDCryptoState extends CryptoState{
+public class MDCryptoState extends CryptoState {
+
     public MDCryptoState() {
-        MDAddRoundKey addRoundKey=new MDAddRoundKey();
+        MDAddRoundKey addRoundKey = new MDAddRoundKey();
+        MDShiftByte shiftBytes = new MDShiftByte();
         //setter for add round key
         processes.add(addRoundKey);
+        processes.add(shiftBytes);
     }
 
     @Override
     public String getName() {
         return "Multi Dimension";
     }
+
 }
