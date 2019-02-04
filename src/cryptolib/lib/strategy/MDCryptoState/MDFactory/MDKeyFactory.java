@@ -7,6 +7,7 @@ package cryptolib.lib.strategy.MDCryptoState.MDFactory;
 
 import cryptolib.lib.CryptoKey;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -15,11 +16,8 @@ import java.util.ArrayList;
 public class MDKeyFactory extends CryptoKey {
 
     public ArrayList createData() {
-        
-        byte[] defaultKey = {0, 0, 0, 0}; //randomize key (byte)
-        
         ArrayList curArray = new ArrayList();
-        
+        Random rand=new   Random();
         for (int i = 0; i < 4; i++) {
             ArrayList tempList3d=new ArrayList();
             for (int j = 0; j < 4; j++) {
@@ -27,11 +25,14 @@ public class MDKeyFactory extends CryptoKey {
                 for (int k = 0; k < i; k++) {
                                 ArrayList tempList1d=new ArrayList();
                     for (int l = 0; l < 4; l++) {
-                        
+                        tempList1d.add((byte)rand.nextInt(256));
                         //tempList1d.add(//random byte)
                     }
+                   tempList2d.add(tempList1d);
                 }
+                tempList3d.add(tempList2d);
             }
+           curArray.add(tempList3d);
         }
         //4 is standard
         return curArray;

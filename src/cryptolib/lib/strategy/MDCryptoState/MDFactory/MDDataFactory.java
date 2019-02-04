@@ -7,6 +7,7 @@ package cryptolib.lib.strategy.MDCryptoState.MDFactory;
 
 import cryptolib.lib.strategy.MDCryptoState.MDCryptoData;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  *
@@ -22,23 +23,44 @@ public class MDDataFactory {
 
     public MDCryptoData createData(byte[] data) {
         MDCryptoData cryptoData = new MDCryptoData();
-        ArrayList curArray = createData();
+        //
         return cryptoData;
     }
 
     public void popluateBlock(byte[] data) {
-        
-    }
-
-    public ArrayList createData() {
-        ArrayList curArray = new ArrayList();
-        for (int i = 0; i < this.dim; i++) {
-            for (int j = 0; j < 4; j++) {
-                curArray.add(new ArrayList());
+    
+        Stack items=new Stack();
+        for (int i = 0; i < data.length; i++) {
+            byte b = data[i];
+            items.add(b);
+        }
+        while(!items.isEmpty()){
+        for (int i = 0; i < 4; i++) {
+            ArrayList tempItems=new ArrayList();
+            tempItems.add(items.pop());
+        }
+}
+        for (int i = 0; i < getDim(data.length); i++) {
+            ArrayList cer=new  ArrayList();
+            while(cer.size()>4){
+                
+                
             }
         }
-        //4 is standard
-        return curArray;
+        
+      
+                
     }
-
+      public void setData(ArrayList data){
+            ArrayList newData=new ArrayList();
+            
+            
+        }
+    
+    
+    
+    
+    public int getDim(int items) {
+        return dim=(int) (Math.ceil(1/(Math.log(4)/Math.log(items))));
+    }
 }
