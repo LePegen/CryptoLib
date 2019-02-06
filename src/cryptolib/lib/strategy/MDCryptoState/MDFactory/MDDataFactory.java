@@ -66,10 +66,11 @@ public class MDDataFactory {
                 for (int j = size / 4 * (i - 1); j < i * size / 4; j++) {
                     if(j<byteData.size()){
                         rawData.add(byteData.get(j));
+                    }else{
+                        rawData.add((byte) 0);
                     }
                 }
                 tempData=data(rawData);
-                //ArrayList tempData=data(new ArrayList(byteData.subList(size/4 * (i - 1), i * size/4)));
                 newData.add(tempData);
             }
         }else{
