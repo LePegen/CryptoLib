@@ -7,6 +7,8 @@ package cryptolib.lib.strategy.MDCryptoState.MDFactory;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
 import cryptolib.lib.strategy.MDCryptoState.MDCryptoData;
+import cryptolib.lib.strategy.MDCryptoState.MDCryptoState;
+import cryptolib.lib.strategy.MDCryptoState.MDProcesses.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -17,15 +19,9 @@ import java.util.Stack;
  */
 public class MDDataFactory {
 
-    private int dim;
-
-    public MDDataFactory(int dim) {
-        this.dim = dim;
-    }
 
     public MDCryptoData createData(byte[] data) {
         MDCryptoData cryptoData = new MDCryptoData();
-        //
         return cryptoData;
     }
 
@@ -53,7 +49,6 @@ public class MDDataFactory {
 
     public void setData(ArrayList data) {
         ArrayList newData = new ArrayList();
-
     }
 
     public ArrayList data(ArrayList byteData) {
@@ -74,24 +69,30 @@ public class MDDataFactory {
                 newData.add(tempData);
             }
         }else{
-            System.out.println("Fin");
             newData=byteData;
         }
         return newData;
     }
     
-    public static void main(String[] args) {
-        MDDataFactory factory=new MDDataFactory(0);
-        ArrayList rawData= new ArrayList();
-        Random rand=new Random();
-        for (int i = 0; i < 20; i++) {
-            rawData.add((byte)rand.nextInt());
-        }
-        rawData=factory.data(rawData);
-            System.out.println(rawData);
-    }
+//    public static void main(String[] args) {
+//        MDDataFactory factory=new MDDataFactory();
+//        MDDepadBlock depadBlock=new MDDepadBlock();
+//        ArrayList rawData= new ArrayList();
+//        Random rand=new Random();
+//        for (int i = 0; i < 10; i++) {
+//            rawData.add((byte)rand.nextInt());
+//        }
+//        rawData=factory.data(rawData);
+//        MDAddPadding addPadding=new MDAddPadding();
+//        System.out.println("");
+//        rawData=addPadding.upDimension(rawData);
+//        rawData=depadBlock.depad(rawData);
+//        System.out.println(rawData);
+//        System.out.println("");
+//
+//    }
 
     public int getDim(int items) {
-        return dim = (int) (Math.ceil(1 / (Math.log(4) / Math.log(items))));
+        return (int) (Math.ceil(1 / (Math.log(4) / Math.log(items))));
     }
 }

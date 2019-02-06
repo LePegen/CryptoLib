@@ -22,7 +22,7 @@ public class MDKeyFactory extends CryptoKey {
             ArrayList tempList3d=new ArrayList();
             for (int j = 0; j < 4; j++) {
                             ArrayList tempList2d=new ArrayList();
-                for (int k = 0; k < i; k++) {
+                for (int k = 0; k < 4; k++) {
                                 ArrayList tempList1d=new ArrayList();
                     for (int l = 0; l < 4; l++) {
                         tempList1d.add((byte)rand.nextInt(256));

@@ -36,7 +36,6 @@ public class MDDepadBlock extends CryptoProcess {
         if (data.get(0) instanceof Byte) {
             for (int i = 0; i < data.size(); i++) {
                 if ((Byte) data.get(i) != (byte) 0) {
-                    System.out.println(data.get(i));
                     values.add(data.get(i));
                 }
             }
