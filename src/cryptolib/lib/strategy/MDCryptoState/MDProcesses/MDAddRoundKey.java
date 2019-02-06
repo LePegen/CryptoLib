@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import cryptolib.lib.CryptoProcess;
 import cryptolib.lib.strategy.MDCryptoState.MDCryptoData;
 import cryptolib.lib.strategy.MDCryptoState.MDCryptoKey;
+import cryptolib.lib.strategy.MDCryptoState.MDFactory.MDDataFactory;
 
 /**
  *
@@ -38,13 +39,19 @@ public class MDAddRoundKey extends CryptoProcess {
     }
     
     
-
+    
+    public static void main(String[] args) {
+        MDDataFactory dataFactory=new MDDataFactory();
+        MDDataFactory keyFactory=new MDDataFactory();
+        MDAddRoundKey addRoundKey=new MDAddRoundKey();
+    }
+    
     /**
      * XOR
      */
     private ArrayList crypt(ArrayList key, ArrayList data) {
         ArrayList newData = new ArrayList<>();
-        if (data.get(0) instanceof Integer) {
+        if (data.get(0) instanceof Byte) {
             for (int i = 0; i < key.size(); i++) {
                 newData.set(i, (int) key.get(i) ^ (int) data.get(i));
             }
