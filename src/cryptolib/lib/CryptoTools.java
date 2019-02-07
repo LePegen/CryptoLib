@@ -50,23 +50,23 @@ public class CryptoTools {
         return currentState.decrypt(data,key);
     }
     
-    //sample implementation
-//    public static void main(String[] args) {
-//        CryptoTools tools = new CryptoTools();
-//        tools.setEncryptState("MDDecyption");
-//        String plainText = "The red fox jumped over the lazy dog";
-//        MDKeyFactory keyFactory=new MDKeyFactory();
-//        CryptoKey key=keyFactory.generateKey();
-//        byte[] data=tools.encrypt(plainText.getBytes(), key);
-//        Encoder encoder = Base64.getUrlEncoder().withoutPadding();
-//        byte[] keyData=MDCryptoState.getData(((MDCryptoKey)key).getKey());
-//        System.out.println("");
-//
-//        System.out.println(encoder.encodeToString(keyData));
-//        System.out.println("\n");
-//        System.out.println(encoder.encodeToString(data));
-//        System.out.println(new String(tools.decrypt(data, key)));
-//
-//    }
+   
+    public static void main(String[] args) {
+        CryptoTools tools = new CryptoTools();
+        tools.setEncryptState("MDDecyption");
+        String plainText = "The red fox jumped over the lazy dog";
+        MDKeyFactory keyFactory=new MDKeyFactory();
+        CryptoKey key=keyFactory.generateKey();
+        byte[] data=tools.encrypt(plainText.getBytes(), key);
+        Encoder encoder = Base64.getUrlEncoder().withoutPadding();
+        byte[] keyData=MDCryptoState.getData(((MDCryptoKey)key).getKey());
+        System.out.println("");
+
+        System.out.println(encoder.encodeToString(keyData));
+        System.out.println("\n");
+        System.out.println(encoder.encodeToString(data));
+        System.out.println(new String(tools.decrypt(data, key)));
+
+    }
 
 }

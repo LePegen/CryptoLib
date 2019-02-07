@@ -44,7 +44,7 @@ public class MDXORBytes extends CryptoProcess {
      */
     public ArrayList addRoundKey(ArrayList key, ArrayList data) {
         ArrayList newData = new ArrayList();
-        if (data.get(0) instanceof Byte) {
+        if (data.get(0) instanceof Byte||key.get(0) instanceof Byte) {
             for (int i = 0; i < key.size(); i++) {
                 int keyVal= (byte) key.get(i);
                 int dataVal=(byte) data.get(i);

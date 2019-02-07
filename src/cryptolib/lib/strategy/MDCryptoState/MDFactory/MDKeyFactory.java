@@ -23,21 +23,24 @@ import java.util.Stack;
  */
 public class MDKeyFactory extends CryptoKeyFactory {
 
-  
-
     @Override
     public CryptoKey createKey(byte[] data) {
         MDCryptoKey cryptoKey = new MDCryptoKey();
         ArrayList tempList = new ArrayList();
-        for (int i = 0; i < data.length; i++) {
-            byte b = data[i];
-            tempList.add(b);
+        for (int i = 0; i < 256; i++) {
+            if (i < data.length) {
+                byte b = data[i];
+                tempList.add((byte) b);
+            } else {
+                tempList.add((byte)0);
+            }
+
         }
         cryptoKey.setKey(data(tempList));
         return cryptoKey;
-       
+
     }
-    
+
     public ArrayList data(ArrayList byteData) {
         ArrayList newData = new ArrayList();
         if (byteData.size() > 4) {
@@ -60,7 +63,7 @@ public class MDKeyFactory extends CryptoKeyFactory {
         }
         return newData;
     }
-    
+
     @Override
     public CryptoKey generateKey() {
 //        ArrayList curArray = new ArrayList();
@@ -84,9 +87,9 @@ public class MDKeyFactory extends CryptoKeyFactory {
 //        }
         //4 is standard
         SecureRandom random = new SecureRandom();
-        byte[] bytes=new byte[256];
+        byte[] bytes = new byte[256];
         random.nextBytes(bytes);
-        System.out.println(Arrays.toString(bytes));
+        System.out.println(bytes.length);
         return createKey(bytes);
     }
 }
