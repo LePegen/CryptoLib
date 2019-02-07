@@ -59,7 +59,7 @@ public class MDShiftByte extends CryptoProcess {
         dataList = depadBlock.depad(dataList);
         //System.out.println(Arrays.toString(MDCryptoState.getData(dataList)));
         //System.out.println(dataList);
-
+        
         dataList = shiftByte.shift(dataList);
         dataList = shiftByte.shift(dataList);
 
