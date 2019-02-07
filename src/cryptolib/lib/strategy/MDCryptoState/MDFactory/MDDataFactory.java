@@ -6,6 +6,8 @@
 package cryptolib.lib.strategy.MDCryptoState.MDFactory;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
+import cryptolib.lib.CryptoData;
+import cryptolib.lib.CryptoDataFactory;
 import cryptolib.lib.strategy.MDCryptoState.MDCryptoData;
 import cryptolib.lib.strategy.MDCryptoState.MDCryptoState;
 import cryptolib.lib.strategy.MDCryptoState.MDProcesses.*;
@@ -17,38 +19,19 @@ import java.util.Stack;
  *
  * @author prg08p-a67-08
  */
-public class MDDataFactory {
+public class MDDataFactory extends CryptoDataFactory{
 
 
-    public MDCryptoData createData(byte[] data) {
+    @Override
+    public CryptoData createData(byte[] data) {
         MDCryptoData cryptoData = new MDCryptoData();
-        return cryptoData;
-    }
-
-    public void popluateBlock(byte[] data) {
-
-        Stack items = new Stack();
+        ArrayList tempList=new ArrayList();
         for (int i = 0; i < data.length; i++) {
             byte b = data[i];
-            items.add(b);
+            tempList.add(b);
         }
-        while (!items.isEmpty()) {
-            for (int i = 0; i < 4; i++) {
-                ArrayList tempItems = new ArrayList();
-                tempItems.add(items.pop());
-            }
-        }
-        for (int i = 0; i < getDim(data.length); i++) {
-            ArrayList cer = new ArrayList();
-            while (cer.size() > 4) {
-
-            }
-        }
-
-    }
-
-    public void setData(ArrayList data) {
-        ArrayList newData = new ArrayList();
+        cryptoData.setData(data(tempList));
+        return cryptoData;
     }
 
     public ArrayList data(ArrayList byteData) {
@@ -92,7 +75,7 @@ public class MDDataFactory {
 //
 //    }
 
-    public int getDim(int items) {
+    public static int getDim(int items) {
         return (int) (Math.ceil(1 / (Math.log(4) / Math.log(items))));
     }
 }

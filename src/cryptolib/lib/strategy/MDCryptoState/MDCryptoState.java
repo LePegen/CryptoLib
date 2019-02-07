@@ -5,7 +5,12 @@
  */
 package cryptolib.lib.strategy.MDCryptoState;
 
+import cryptolib.lib.CryptoData;
+import cryptolib.lib.CryptoDataFactory;
+import cryptolib.lib.CryptoKeyFactory;
 import cryptolib.lib.CryptoState;
+import cryptolib.lib.strategy.MDCryptoState.MDFactory.MDDataFactory;
+import cryptolib.lib.strategy.MDCryptoState.MDFactory.MDKeyFactory;
 import cryptolib.lib.strategy.MDCryptoState.MDProcesses.*;
 import java.util.ArrayList;
 
@@ -18,15 +23,27 @@ public class MDCryptoState extends CryptoState {
     public MDCryptoState() {
         MDXORBytes addRoundKey = new MDXORBytes();
         MDShiftByte shiftBytes = new MDShiftByte();
+        MDAddPadding addPadding=new MDAddPadding();
+        MDDepadBlock depadBlock=new MDDepadBlock();
         //setter for add round key
-        processes.add(addRoundKey);
-        processes.add(shiftBytes);
+        encryptProcessses.add(shiftBytes);
+        encryptProcessses.add(shiftBytes);
+        encryptProcessses.add(addPadding);
+        encryptProcessses.add(addRoundKey);
+        
+        decryptProcessses.add(addRoundKey);
+        decryptProcessses.add(depadBlock);
+        encryptProcessses.add(shiftBytes);
+        encryptProcessses.add(shiftBytes);
     }
 
     @Override
     public String getName() {
-        return "Multi Dimension";
+        return "MDDecyption";
     }
+    
+    
+    //tools
     
     public static boolean isByte(Object item){
         if(item instanceof Byte){
@@ -67,10 +84,27 @@ public class MDCryptoState extends CryptoState {
     public static int getDimensions(ArrayList array, int dim) {
         System.out.println(dim);
         if (isByte(array.get(0))) {
-            return dim+1;
-        }else{
+            return dim + 1;
+        } else {
             return getDimensions((ArrayList) array.get(0), dim + 1);
         }
+    }
+
+    @Override
+    public CryptoDataFactory setDataFactory() {
+        return new MDDataFactory();
+    }
+
+    @Override
+    public CryptoKeyFactory setKeyFactory() {
+        return new MDKeyFactory();
+
+    }
+
+    @Override
+    public byte[] convertData(CryptoData data) {
+        MDCryptoData newData=(MDCryptoData) data;
+        return getData(newData.getData());
     }
 
 }

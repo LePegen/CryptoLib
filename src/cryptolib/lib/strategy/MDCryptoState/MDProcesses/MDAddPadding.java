@@ -19,7 +19,6 @@ public class MDAddPadding extends CryptoProcess {
 
     public ArrayList addPadding(ArrayList tempList) {
         ArrayList newList = MDShiftByte.cloneList(tempList);
-        System.out.println("Input Dimensions"+MDCryptoState.getDimensions(tempList));
         for (int i = 0; i < 4-MDCryptoState.getDimensions(tempList); i++) {
             ArrayList arrayList = new ArrayList();
             arrayList.add(newList);
@@ -28,7 +27,6 @@ public class MDAddPadding extends CryptoProcess {
             arrayList.add(mapZeroList(newList));
             newList=arrayList;
         }
-        System.out.println("New list Dimensions"+MDCryptoState.getDimensions(newList));
 
         return newList;
     }
@@ -38,6 +36,7 @@ public class MDAddPadding extends CryptoProcess {
         MDCryptoData newData=new MDCryptoData();
         MDCryptoData stateData=(MDCryptoData) state.getData();
         newData.setData(addPadding(stateData.getData()));
+        state.setData(newData);
     }
 
     private ArrayList mapZeroList(ArrayList list) {

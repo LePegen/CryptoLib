@@ -2,7 +2,13 @@ package cryptolib.lib;
 
 
 
-import cryptolib.lib.strategy.MDCryptoState.MDCryptoState;
+import cryptolib.lib.strategy.MDCryptoState.*;
+import cryptolib.lib.strategy.MDCryptoState.MDFactory.MDKeyFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Base64.Encoder;
+
 
 import java.util.HashMap;
 
@@ -15,27 +21,52 @@ import java.util.HashMap;
  *
  * @author prg08p-a67-08
  */
-public abstract class CryptoTools {
+public class CryptoTools {
 
     private HashMap<String, CryptoState> states;
     private CryptoState currentState = null;
 
     public CryptoTools() {
         states = new HashMap<>();
-        states.put("MD", new MDCryptoState());
+        MDCryptoState mdState=new MDCryptoState();
+        /**
+         * States:
+         * MDDecyption
+         */
+        
+        states.put(mdState.getName(), mdState);
     }
 
     public void setEncryptState(String stateKey) {
         this.currentState = states.get(stateKey);
     }
 
-    public void encrypt(CryptoKey key, CryptoData data) {
-        //currentState.encrypt(key, data);
+    public byte[] encrypt(byte[] data, CryptoKey key) {
+        return currentState.encrypt(data,key);
         
     }
 
-    public void decrypt(CryptoKey key, CryptoData data) {
-        currentState.decrypt(key, data);
+    public byte[] decrypt(byte[] data, CryptoKey key) {
+        return currentState.decrypt(data,key);
     }
+    
+    //sample implementation
+//    public static void main(String[] args) {
+//        CryptoTools tools = new CryptoTools();
+//        tools.setEncryptState("MDDecyption");
+//        String plainText = "The red fox jumped over the lazy dog";
+//        MDKeyFactory keyFactory=new MDKeyFactory();
+//        CryptoKey key=keyFactory.generateKey();
+//        byte[] data=tools.encrypt(plainText.getBytes(), key);
+//        Encoder encoder = Base64.getUrlEncoder().withoutPadding();
+//        byte[] keyData=MDCryptoState.getData(((MDCryptoKey)key).getKey());
+//        System.out.println("");
+//
+//        System.out.println(encoder.encodeToString(keyData));
+//        System.out.println("\n");
+//        System.out.println(encoder.encodeToString(data));
+//        System.out.println(new String(tools.decrypt(data, key)));
+//
+//    }
 
 }

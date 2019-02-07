@@ -15,14 +15,21 @@ import cryptolib.lib.CryptoKey;
  */
 public class MDCryptoKey extends CryptoKey {
 
-    private ArrayList ket;
+    private ArrayList key;
 
     public MDCryptoKey() {
-        ket = new ArrayList();
+        key = new ArrayList();
     }
 
-    public ArrayList getData() {
-        return this.ket;
+    public ArrayList getKey() {
+        return key;
     }
+
+    public void setKey(ArrayList key) {
+        this.key = key;
+    }
+    
+    
+
 
 }

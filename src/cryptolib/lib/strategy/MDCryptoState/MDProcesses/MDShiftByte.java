@@ -22,52 +22,7 @@ public class MDShiftByte extends CryptoProcess {
 //    public MDShiftByte(MDCryptoData data) {
 //        this.data = data;
 //    }
-    public static void main(String[] args) {
-        MDDataFactory dataFactory = new MDDataFactory();
-        MDKeyFactory keyFactory = new MDKeyFactory();
-        MDXORBytes addRoundKey = new MDXORBytes();
-        MDShiftByte shiftByte = new MDShiftByte();
-        MDAddPadding padd = new MDAddPadding();
-        MDDepadBlock depadBlock = new MDDepadBlock();
-        ArrayList data = new ArrayList();
-
-        for (int i = 0; i < 15; i++) {
-            Random rand = new Random();
-            data.add((byte) rand.nextInt(256));
-        }
-
-        ArrayList dataList = dataFactory.data(data);
-        ArrayList keyList = keyFactory.createData();
-
-        System.out.println("input:" + dataList);
-        //System.out.println("deshift: "+Arrays.toString(MDCryptoState.getData(dataList)));
-
-        dataList = shiftByte.shift(dataList);
-        dataList = shiftByte.shift(dataList);
-
-        System.out.println(dataList);
-        // System.out.println(Arrays.toString(MDCryptoState.getData(dataList)));
-
-        dataList = padd.addPadding(dataList);
-       
-        dataList = addRoundKey.addRoundKey(keyList, dataList);
-
-        //decyption
-        //dataList = addRoundKey.addRoundKey(keyList, dataList);
-        //System.out.println(Arrays.toString(MDCryptoState.getData(dataList)));
-        //System.out.println(dataList);
-        dataList = depadBlock.depad(dataList);
-        //System.out.println(Arrays.toString(MDCryptoState.getData(dataList)));
-        //System.out.println(dataList);
-        
-        dataList = shiftByte.shift(dataList);
-        dataList = shiftByte.shift(dataList);
-
-        System.out.println(Arrays.toString(MDCryptoState.getData(dataList)));
-        //System.out.println(dataList);
-
-        //depad or pad is wrong
-    }
+   
 
     public ArrayList shift(ArrayList data) {
         //get values
@@ -168,6 +123,10 @@ public class MDShiftByte extends CryptoProcess {
 
     @Override
     protected void action() {
+        ArrayList list=((MDCryptoData)state.getData()).getData();
+        MDCryptoData data=new MDCryptoData();
+        data.setData(list);
+        state.setData(data);
     }
 
     public static ArrayList cloneList(ArrayList list) {

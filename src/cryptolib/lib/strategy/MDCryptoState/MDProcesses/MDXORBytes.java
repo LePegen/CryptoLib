@@ -32,9 +32,9 @@ public class MDXORBytes extends CryptoProcess {
 
     @Override
     protected void action() {
-        ArrayList keyAL = key.getData();
-        ArrayList dataAL = data.getData();
-        this.data.setData(addRoundKey(keyAL, dataAL));
+        ArrayList keyAL = ((MDCryptoKey)state.getKey()).getKey();
+        ArrayList dataAL = ((MDCryptoData)state.getData()).getData();
+        ((MDCryptoData) state.getData()).setData(addRoundKey(keyAL, dataAL));
     }
 
 

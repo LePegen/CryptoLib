@@ -12,33 +12,44 @@ import java.util.ArrayList;
  */
 public abstract class CryptoState {
 
-    protected ArrayList<CryptoProcess> processes;
+    protected ArrayList<CryptoProcess> encryptProcessses;
+    protected ArrayList<CryptoProcess> decryptProcessses;
     protected String name;
     protected CryptoData data;
     protected CryptoKey key;
 
     public CryptoState() {
-        processes = new ArrayList<>();
+        encryptProcessses = new ArrayList<>();
+        decryptProcessses = new ArrayList<>();
         this.name = getName();
+        this.dataFactory=setDataFactory();
+        this.keyFactory=setKeyFactory();
     }
-
+    
+    public abstract CryptoDataFactory setDataFactory();
+    public abstract CryptoKeyFactory setKeyFactory();
+    public abstract byte[] convertData(CryptoData data);
+    
     public abstract String getName();
+    CryptoDataFactory dataFactory;
+    CryptoKeyFactory keyFactory;
 
-    public void encrypt(byte[] date, byte[] key) {
-        //this.key = key;
-        this.data = data;
-        for (int i = 0; i < processes.size(); i++) {
-            processes.get(i).execute(this);
+    public byte[] encrypt(byte[] data, CryptoKey key) {
+        this.key = key;
+        this.data = dataFactory.createData(data);
+        for (int i = 0; i < encryptProcessses.size(); i++) {
+            encryptProcessses.get(i).execute(this);
         }
+        return convertData(this.data);
     }
 
-    public byte[] decrypt(CryptoKey key, CryptoData data) {
+    public byte[] decrypt(byte[] data, CryptoKey key) {
         this.key = key;
-        this.data = data;
-        for (int i = processes.size() - 1; i > -1; i--) {
-            processes.get(i).execute(this);
+        this.data = dataFactory.createData(data);
+        for (int i = 0; i < decryptProcessses.size(); i++) {
+            decryptProcessses.get(i).execute(this);
         }
-        return null;
+        return convertData(this.data);
     }
 
     public CryptoData getData() {
