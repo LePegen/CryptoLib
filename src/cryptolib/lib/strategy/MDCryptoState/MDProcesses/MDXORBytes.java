@@ -17,7 +17,7 @@ import java.util.Random;
  *
  * @author prg08p-a67-08
  */
-public class MDAddRoundKey extends CryptoProcess {
+public class MDXORBytes extends CryptoProcess {
 
     /**
      * TODO: unit testing
@@ -26,7 +26,7 @@ public class MDAddRoundKey extends CryptoProcess {
     private MDCryptoKey key;
     private MDCryptoData data;
 
-    public MDAddRoundKey() {
+    public MDXORBytes() {
         //anti pattern i think
     }
 
@@ -34,39 +34,15 @@ public class MDAddRoundKey extends CryptoProcess {
     protected void action() {
         ArrayList keyAL = key.getData();
         ArrayList dataAL = data.getData();
-        this.data.setData(crypt(keyAL, dataAL));
+        this.data.setData(addRoundKey(keyAL, dataAL));
     }
 
-    public static void main(String[] args) {
-        MDDataFactory dataFactory = new MDDataFactory();
-        MDKeyFactory keyFactory = new MDKeyFactory();
-        MDAddRoundKey addRoundKey = new MDAddRoundKey();
-        MDShiftByte shiftByte=new MDShiftByte();
-        MDAddPadding padd=new MDAddPadding();
-        ArrayList data = new ArrayList();
 
-        for (int i = 0; i < 256; i++) {
-            Random rand = new Random();
-            data.add((byte) rand.nextInt(200));
-        }        
-            
-        ArrayList dataList = dataFactory.data(data);
-        ArrayList keyList=keyFactory.createData();
-        
-        
-        System.out.println(dataList);
-        data=shiftByte.shift(dataList);
-        System.out.println(data);
-        data=padd.upDimension(data);
-        System.out.println(data);
-        ArrayList list = addRoundKey.crypt(keyList, dataList);
-        System.out.println("");
-    }
 
     /**
      * XOR
      */
-    private ArrayList crypt(ArrayList key, ArrayList data) {
+    public ArrayList addRoundKey(ArrayList key, ArrayList data) {
         ArrayList newData = new ArrayList();
         if (data.get(0) instanceof Byte) {
             for (int i = 0; i < key.size(); i++) {
@@ -77,7 +53,7 @@ public class MDAddRoundKey extends CryptoProcess {
             }
         } else {
             for (int i = 0; i < key.size(); i++) {
-                newData.add(crypt((ArrayList) key.get(i), (ArrayList) data.get(i)));
+                newData.add(addRoundKey((ArrayList) key.get(i), (ArrayList) data.get(i)));
             }
         }
         return newData;

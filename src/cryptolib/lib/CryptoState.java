@@ -24,20 +24,21 @@ public abstract class CryptoState {
 
     public abstract String getName();
 
-    public void encrypt(CryptoKey key, CryptoData data) {
-        this.key = key;
+    public void encrypt(byte[] date, byte[] key) {
+        //this.key = key;
         this.data = data;
         for (int i = 0; i < processes.size(); i++) {
             processes.get(i).execute(this);
         }
     }
 
-    public void decrypt(CryptoKey key, CryptoData data) {
+    public byte[] decrypt(CryptoKey key, CryptoData data) {
         this.key = key;
         this.data = data;
         for (int i = processes.size() - 1; i > -1; i--) {
             processes.get(i).execute(this);
         }
+        return null;
     }
 
     public CryptoData getData() {

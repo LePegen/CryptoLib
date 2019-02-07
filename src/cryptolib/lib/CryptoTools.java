@@ -30,7 +30,8 @@ public abstract class CryptoTools {
     }
 
     public void encrypt(CryptoKey key, CryptoData data) {
-        currentState.encrypt(key, data);
+        //currentState.encrypt(key, data);
+        
     }
 
     public void decrypt(CryptoKey key, CryptoData data) {
