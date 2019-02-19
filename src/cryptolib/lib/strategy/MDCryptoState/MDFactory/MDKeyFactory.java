@@ -32,9 +32,8 @@ public class MDKeyFactory extends CryptoKeyFactory {
                 byte b = data[i];
                 tempList.add((byte) b);
             } else {
-                tempList.add((byte)0);
+                tempList.add((byte) 0);
             }
-
         }
         cryptoKey.setKey(data(tempList));
         return cryptoKey;
@@ -88,8 +87,10 @@ public class MDKeyFactory extends CryptoKeyFactory {
         //4 is standard
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[256];
-        random.nextBytes(bytes);
-        System.out.println(bytes.length);
+        for (int i = 0; i < 256; i++) {
+            bytes[i] = (byte) random.nextInt(126);
+        }
         return createKey(bytes);
+
     }
 }

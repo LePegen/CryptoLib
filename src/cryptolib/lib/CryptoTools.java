@@ -55,17 +55,17 @@ public class CryptoTools {
         CryptoTools tools = new CryptoTools();
         tools.setEncryptState("MDDecyption");
         String plainText = "The red fox jumped over the lazy dog";
+        
         MDKeyFactory keyFactory=new MDKeyFactory();
         CryptoKey key=keyFactory.generateKey();
-        byte[] data=tools.encrypt(plainText.getBytes(), key);
-        Encoder encoder = Base64.getUrlEncoder().withoutPadding();
+        
+        byte[]  data=tools.encrypt(plainText.getBytes(), key);
         byte[] keyData=MDCryptoState.getData(((MDCryptoKey)key).getKey());
-        System.out.println("");
-
-        System.out.println(encoder.encodeToString(keyData));
+        
+        
         System.out.println("\n");
-        System.out.println(encoder.encodeToString(data));
-        System.out.println(new String(tools.decrypt(data, key)));
+        CryptoKey dataKey=keyFactory.createKey(keyData);
+        System.out.println(new String(tools.decrypt(data,dataKey)));
 
     }
 
